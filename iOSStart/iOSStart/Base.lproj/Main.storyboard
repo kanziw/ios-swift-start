@@ -108,7 +108,40 @@
                     <view key="view" contentMode="scaleToFill" id="mVp-UL-i7p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iYB-K8-1mX">
+                                <rect key="frame" x="0.0" y="64" width="375" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DYv-Bc-92T">
+                                <rect key="frame" x="15" y="578" width="345" height="30"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Wirte what to do" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Uw-qM-Yjh">
+                                        <rect key="frame" x="0.0" y="0.0" width="285" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYS-OJ-3Gg">
+                                        <rect key="frame" x="295" y="0.0" width="50" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="rFe-Hd-4vu"/>
+                                        </constraints>
+                                        <state key="normal" title="Save"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iYB-K8-1mX" firstAttribute="top" secondItem="TMQ-qq-Fxe" secondAttribute="top" id="0UZ-UK-E69"/>
+                            <constraint firstItem="TMQ-qq-Fxe" firstAttribute="trailing" secondItem="DYv-Bc-92T" secondAttribute="trailing" constant="15" id="4Ja-Vp-qWA"/>
+                            <constraint firstItem="TMQ-qq-Fxe" firstAttribute="bottom" secondItem="DYv-Bc-92T" secondAttribute="bottom" constant="10" id="Oc0-mM-rno"/>
+                            <constraint firstItem="TMQ-qq-Fxe" firstAttribute="trailing" secondItem="iYB-K8-1mX" secondAttribute="trailing" id="WI9-yY-bCb"/>
+                            <constraint firstItem="iYB-K8-1mX" firstAttribute="leading" secondItem="TMQ-qq-Fxe" secondAttribute="leading" id="YUy-te-Edq"/>
+                            <constraint firstItem="DYv-Bc-92T" firstAttribute="leading" secondItem="TMQ-qq-Fxe" secondAttribute="leading" constant="15" id="dtT-VU-UFB"/>
+                            <constraint firstItem="DYv-Bc-92T" firstAttribute="top" secondItem="iYB-K8-1mX" secondAttribute="bottom" constant="10" id="f4c-ap-VTU"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="TMQ-qq-Fxe"/>
                     </view>
                     <navigationItem key="navigationItem" id="bJ2-Ts-Wff"/>
