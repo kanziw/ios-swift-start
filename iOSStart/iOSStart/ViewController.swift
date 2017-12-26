@@ -9,12 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var value = 0 {
+        didSet {
+            countLabel.text = String(value)
+        }
+    }
 
     @IBOutlet weak var countLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        countLabel.text = "0"
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,12 +26,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func addCount(value: Int) {
-        if let countString = countLabel.text, let count = Int(countString) {
-            countLabel.text = String(count + value)
-        }
+    func addCount(adder: Int) {
+        value = value + adder
     }
 
-    @IBAction func plusAction(_ sender: UIButton) { addCount(value: 1) }
-    @IBAction func minusAction(_ sender: UIButton) { addCount(value: -1) }
+    @IBAction func plusAction(_ sender: UIButton) { addCount(adder: 1) }
+    @IBAction func minusAction(_ sender: UIButton) { addCount(adder: -1) }
 }
