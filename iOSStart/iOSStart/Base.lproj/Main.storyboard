@@ -31,17 +31,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="58" height="30"/>
                                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="-"/>
-                                        <connections>
-                                            <action selector="minusAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ANE-Eg-6Cv"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HLd-wU-lXi">
                                         <rect key="frame" x="62" y="0.0" width="58" height="30"/>
                                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="+"/>
-                                        <connections>
-                                            <action selector="plusAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aLZ-Qg-tMR"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -61,6 +55,8 @@
                     <navigationItem key="navigationItem" id="7f1-ZT-ART"/>
                     <connections>
                         <outlet property="countLabel" destination="fWc-FN-ial" id="CnS-mr-dVs"/>
+                        <outlet property="minusButton" destination="03m-4q-Jsd" id="lI1-dV-CWf"/>
+                        <outlet property="plusButton" destination="HLd-wU-lXi" id="1Gb-0I-Aew"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

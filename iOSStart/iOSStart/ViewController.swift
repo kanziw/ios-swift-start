@@ -15,25 +15,20 @@ class ViewController: UIViewController {
     var disposeBag = DisposeBag()
     
     @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var plusButton: UIButton!
+    @IBOutlet weak var minusButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         value.asObservable()
             .map(String.init)
             .bind(to: countLabel.rx.text)
             .disposed(by:disposeBag)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        plusButton.rx.tap.asObservable().map({1}).subscribe(onNext: addCount).disposed(by: disposeBag)
+        minusButton.rx.tap.asObservable().map({-1}).subscribe(onNext: addCount).disposed(by: disposeBag)
     }
     
-    func addCount(adder: Int) {
-        value.value = value.value + adder
-    }
-
-    @IBAction func plusAction(_ sender: UIButton) { addCount(adder: 1) }
-    @IBAction func minusAction(_ sender: UIButton) { addCount(adder: -1) }
+    func addCount(adder: Int) { value.value = value.value + adder }
 }
