@@ -168,6 +168,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="bJ2-Ts-Wff"/>
                     <connections>
+                        <outlet property="stackViewBottomConstraint" destination="Oc0-mM-rno" id="L8d-QG-DH4"/>
                         <outlet property="tableView" destination="iYB-K8-1mX" id="o58-7a-c6i"/>
                     </connections>
                 </viewController>
