@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class ViewController: UIViewController {
+class CounterViewController: UIViewController {
     var value = Variable(0)
     var disposeBag = DisposeBag()
     
@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "COUNTER"
         
         value.asObservable()
             .map(String.init)
