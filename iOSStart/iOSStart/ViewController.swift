@@ -7,18 +7,22 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ViewController: UIViewController {
-    var value = 0 {
-        didSet {
-            countLabel.text = String(value)
-        }
-    }
-
+    var value = Variable(0)
+    var disposeBag = DisposeBag()
+    
     @IBOutlet weak var countLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        value.asObservable()
+            .map(String.init)
+            .bind(to: countLabel.rx.text)
+            .disposed(by:disposeBag)
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,7 +31,7 @@ class ViewController: UIViewController {
     }
     
     func addCount(adder: Int) {
-        value = value + adder
+        value.value = value.value + adder
     }
 
     @IBAction func plusAction(_ sender: UIButton) { addCount(adder: 1) }
