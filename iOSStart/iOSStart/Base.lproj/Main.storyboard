@@ -154,6 +154,7 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="2JD-7H-csy" id="kBe-Gw-83y"/>
+                                    <outlet property="delegate" destination="2JD-7H-csy" id="thu-GZ-hNm"/>
                                 </connections>
                             </tableView>
                         </subviews>
