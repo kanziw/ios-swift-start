@@ -6,6 +6,7 @@ target 'iOSStart' do
   use_frameworks!
   pod "RxSwift"
   pod "RxCocoa"
+  pod "RxOptional"
 
   # Pods for iOSStart
 

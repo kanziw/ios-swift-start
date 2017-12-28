@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxOptional
 
 class TodoListViewController: UIViewController {
     var todoList = Array<String>()
@@ -30,10 +31,11 @@ class TodoListViewController: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         tableView.keyboardDismissMode = .interactive
         
+        func getInputText() -> String? {return textInputView.textField.text}
+
         textInputView.saveButton.rx.tap
-            .withLatestFrom(textInputView.textField.rx.text) { (_, string) -> String? in return string }
-            .filter({ $0 != nil && $0?.isEmpty == false }).debug("3")
-            .map({$0!}).debug("3")
+            .map(getInputText)
+            .filterNil().filterEmpty()
             .subscribe(onNext: saveTodoItemAction)
             .disposed(by: disposeBag)
     }
