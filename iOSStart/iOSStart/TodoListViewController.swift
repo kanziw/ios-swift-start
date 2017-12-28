@@ -64,11 +64,13 @@ extension TodoListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return true }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        tableView.beginUpdates()
         if (editingStyle == UITableViewCellEditingStyle.delete) {
             if let todoItemIndex = indexPath.last {
                 todoList.remove(at: todoItemIndex)
-                reloadTableData()
+                tableView.deleteRows(at: [indexPath], with: .left)
             }
         }
+        tableView.endUpdates()
     }
 }
