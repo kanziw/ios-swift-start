@@ -10,68 +10,36 @@ import UIKit
 
 class TodoListViewController: UIViewController {
     var todoList = Array<String>()
-    var orgBottomStackViewConstraint:CGFloat?
-    
+
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var stackViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var textField: UITextField!
     
+    lazy var textInputView: TextInputView = {
+        let inputView = UINib(nibName: "TextInputView", bundle: nil).instantiate(withOwner: nil, options: nil).first as! TextInputView
+        return inputView
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "TO-DO LIST"
         
         // hide bottom line
         tableView.tableFooterView = UIView()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(willShowKeyboard(_:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willHideKeyboard(_:)), name: .UIKeyboardWillHide, object: nil)
-    }
-    
-    
-    @objc func willShowKeyboard(_ noti: Notification) {
-        //        print("Keyboard will show \(noti.userInfo)")
-        guard let userInfo = noti.userInfo, let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double, let height = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else {
-            return
-        }
-        
-        let tabBarHeight = ((UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController as? UITabBarController)?.tabBar.frame.height ?? 0.0
-        
-        if orgBottomStackViewConstraint == nil {
-            orgBottomStackViewConstraint = self.stackViewBottomConstraint.constant
-            self.stackViewBottomConstraint.constant = self.stackViewBottomConstraint.constant + height - tabBarHeight
-            UIView.animate(withDuration: duration) {
-                self.view.layoutIfNeeded()// constranit 를 수정하면 내가 바뀌었다고 알려야 함
-            }
-        }
-    }
-    
-    @objc func willHideKeyboard(_ noti:Notification) {
-        //        print("Keyboard will show \(noti.userInfo)")
-        guard let userInfo = noti.userInfo, let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double, let height = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else {
-            return
-        }
+        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        tableView.keyboardDismissMode = .interactive
 
-        let tabBarHeight = ((UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController as? UITabBarController)?.tabBar.frame.height ?? 0.0
-        
-        if let constraint = orgBottomStackViewConstraint {
-            self.stackViewBottomConstraint.constant = constraint
-            orgBottomStackViewConstraint = nil
-            UIView.animate(withDuration: duration) {
-                self.view.setNeedsDisplay() // constranit 를 수정하면 내가 바뀌었다고 알려야 함
-            }
-        }
+        textInputView.saveButton.addTarget(self, action:#selector(saveTodoItemAction), for: .touchUpInside)
     }
-
-    @IBAction func saveButtonAction(_ sender: UIButton) {
-        guard let currentText = textField?.text else {
-            return
-        }
-        if (!currentText.isEmpty) {
-            todoList.append(currentText)
-            textField.text = ""
+    
+    @objc func saveTodoItemAction() {
+        if let todoItem = textInputView.textField.text, !todoItem.isEmpty {
+            todoList.insert(todoItem, at: 0)
+            textInputView.textField.text = ""
             tableView.reloadData()
         }
     }
+    
+    override var inputAccessoryView: UIView? { return textInputView }
+    override var canBecomeFirstResponder: Bool { return true }
 }
 
 extension TodoListViewController: UITableViewDataSource {
@@ -84,9 +52,4 @@ extension TodoListViewController: UITableViewDataSource {
         cell.textLabel?.text = todoList[indexPath.row]
         return cell
     }
-}
-
-extension TodoListViewController: UIScrollViewDelegate {
-    // scroll action handler
-//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) { view.endEditing(true) }
 }
