@@ -41,8 +41,10 @@ class TodoListViewController: UIViewController {
     func saveTodoItemAction(todoItem: String) {
         todoList.insert(todoItem, at: 0)
         textInputView.textField.text = ""
-        tableView.reloadData()
+        reloadTableData()
     }
+    
+    func reloadTableData() { tableView.reloadData()}
     
     override var inputAccessoryView: UIView? { return textInputView }
     override var canBecomeFirstResponder: Bool { return true }
@@ -57,5 +59,16 @@ extension TodoListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = todoList[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return true }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            if let todoItemIndex = indexPath.last {
+                todoList.remove(at: todoItemIndex)
+                reloadTableData()
+            }
+        }
     }
 }
